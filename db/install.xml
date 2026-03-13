@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/mchelpers/db" VERSION="2026021901" COMMENT="XMLDB file for Moodle local/mchelpers">
+    <TABLES>
+        <TABLE NAME="local_mchelpers_course_meta" COMMENT="Course metadata table for mchelpers plugin">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+                <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" COMMENT="Foreign key to course table" />
+                <FIELD NAME="meta_key" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Metadata key name" />
+                <FIELD NAME="meta_value" TYPE="text" NOTNULL="false" COMMENT="Metadata value (long text)" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="courseid_fk" TYPE="foreign" FIELDS="courseid" REFTABLE="course" REFFIELDS="id" />
+                <KEY NAME="courseid_metakey_uniq" TYPE="unique" FIELDS="courseid, meta_key" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="courseid_metakey_uniq" UNIQUE="true" FIELDS="courseid, meta_key"/>
+                <INDEX NAME="metakey_idx" UNIQUE="false" FIELDS="meta_key"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_mchelpers_user_meta" COMMENT="User metadata table for mchelpers plugin">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true" />
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" COMMENT="Foreign key to user table" />
+                <FIELD NAME="meta_key" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Metadata key name" />
+                <FIELD NAME="meta_value" TYPE="text" NOTNULL="false" COMMENT="Metadata value (long text)" />
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id" />
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id" />
+                <KEY NAME="userid_metakey_uniq" TYPE="unique" FIELDS="userid, meta_key" />
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="userid_metakey_uniq" UNIQUE="true" FIELDS="userid, meta_key"/>
+                <INDEX NAME="metakey_idx" UNIQUE="false" FIELDS="meta_key"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_mchelpers_content" COMMENT="Content table for pages, faqs, testimonials and other content types">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key to user table (createdby)"/>
+                <FIELD NAME="usermodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key to user table (last modified by)"/>
+                <FIELD NAME="contenttype" TYPE="char" LENGTH="50" NOTNULL="true" SEQUENCE="false" COMMENT="Type of content: page, faqs, faq_categories testimonials, and others "/>
+                <FIELD NAME="title" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Content title/name "/>
+                <FIELD NAME="shortname" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="Short name/slug for pages"/>
+                <FIELD NAME="content" TYPE="text" NOTNULL="false" SEQUENCE="false"/>
+                <FIELD NAME="contentformat" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="contentitemid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+                <FIELD NAME="image" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Feature image file id for content"/>
+                <FIELD NAME="status" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="status 0=draft, 1=published"/>
+                <FIELD NAME="parentid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Parent content ID for hierarchy"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="userid_fk" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="usermodified_fk" TYPE="foreign" FIELDS="usermodified" REFTABLE="user" REFFIELDS="id"/>
+                <KEY NAME="shortname_uniq" TYPE="unique" FIELDS="shortname"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="userid_ix" UNIQUE="false" FIELDS="userid"/>
+                <INDEX NAME="usermodified_ix" UNIQUE="false" FIELDS="usermodified"/>
+                <INDEX NAME="contenttype_ix" UNIQUE="false" FIELDS="contenttype"/>
+                <INDEX NAME="status_ix" UNIQUE="false" FIELDS="status"/>
+                <INDEX NAME="parentid_ix" UNIQUE="false" FIELDS="parentid"/>
+                <INDEX NAME="contenttype_status_idx" UNIQUE="false" FIELDS="contenttype, status"/>
+            </INDEXES>
+        </TABLE>
+        <TABLE NAME="local_mchelpers_content_meta" COMMENT="Content metadata table for additional content attributes">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="contentid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Foreign key to local_mchelpers_content table"/>
+                <FIELD NAME="meta_key" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="Metadata key name like: feature_image, designation, and others"/>
+                <FIELD NAME="meta_value" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Metadata value"/>
+                <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+                <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false"/>
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="contentid_fk" TYPE="foreign" FIELDS="contentid" REFTABLE="local_mchelpers_content" REFFIELDS="id"/>
+                <KEY NAME="contentid_metakey_uniq" TYPE="unique" FIELDS="contentid, meta_key"/>
+            </KEYS>
+            <INDEXES>
+                <INDEX NAME="contentid_ix" UNIQUE="false" FIELDS="contentid"/>
+                <INDEX NAME="metakey_ix" UNIQUE="false" FIELDS="meta_key"/>
+            </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>

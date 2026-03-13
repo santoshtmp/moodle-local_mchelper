@@ -1,0 +1,67 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_mchelpers/content/view
+
+    Template for displaying content view page.
+
+    Example context (json):
+    {
+        "content": {
+            "title": "Sample Content",
+            "content": "<p>This is sample content.</p>",
+            "contentformat": "1",
+            "contenttype": "page",
+            "status": "1",
+            "id": "1"
+        },
+        "authorname": "John Doe",
+        "contenttypelabel": "Page"
+    }
+}}
+
+<div class="content-view-page">
+    {{! Content header }}
+    <div class="content-header mb-4">
+        <h2 class="content-title">{{content.title}}</h2>
+    </div>
+
+    {{! Content meta information }}
+    <div class="content-meta text-muted mb-3">
+        <span class="content-type mr-3">
+            {{#str}}contenttype, local_mchelpers{{/str}}: {{contenttypelabel}}
+        </span>
+        <span class="content-status mr-3">
+            {{#str}}status{{/str}}: 
+            {{#content.status}}
+                <span class="badge bg-success">{{#str}}published, local_mchelpers{{/str}}</span>
+            {{/content.status}}
+            {{^content.status}}
+                <span class="badge bg-secondary">{{#str}}draft, local_mchelpers{{/str}}</span>
+            {{/content.status}}
+        </span>
+        <span class="content-author ml-3">
+            {{#str}}author, local_mchelpers{{/str}}: {{authorname}}
+        </span>
+    </div>
+
+    {{! Content body }}
+    <div class="content-body generalbox p-3 border rounded">
+        {{{content.content}}}
+    </div>
+
+</div>
