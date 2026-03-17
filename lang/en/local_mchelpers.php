@@ -37,21 +37,69 @@ $string['configenable'] = 'Enable the MHelpers plugin functionality';
 $string['manage'] = 'Manage Moodle custom Helpers';
 
 // =============================================================================
-// EXTERNAL SITE INTEGRATION STRINGS
+// GENERAL SETTINGS
 // =============================================================================
 
+$string['general'] = 'General';
+$string['generalsettings'] = 'General Settings';
+$string['enable_desc'] = 'Enable the MHelpers plugin functionality';
+$string['plugininfo'] = 'Plugin Information';
+$string['plugininfo_desc'] = 'Plugin information and description.';
+$string['contentmanagement_desc'] = 'Create and manage pages, FAQs, testimonials, and other content.';
+$string['tip'] = 'Tip';
+$string['generate_secret_tip'] = 'Generate a secure key using:';
+
+// =============================================================================
+// SSO INTEGRATION TAB
+// =============================================================================
+
+$string['sso_integration'] = 'SSO Integration';
+$string['sso_integration_desc'] = 'Configure SSO integration with external systems (WordPress, Drupal, custom apps, etc.). Users from external systems can automatically log in to Moodle using encrypted data exchange.';
+$string['configure_sso'] = 'Configure Single Sign-On';
 $string['external_site_integration'] = 'External Site Integration';
-$string['external_site_integration_desc'] = 'Configure Single Sign-On (SSO) integration with an external system (WordPress, Drupal, custom PHP app, etc.). You can connect to one external site at a time.';
 $string['external_site_url'] = 'External Site URL';
 $string['external_site_url_desc'] = 'The base URL of your external site (e.g., https://example.com). Used for error redirects.';
 $string['shared_secret'] = 'Shared Secret Key';
 $string['shared_secret_desc'] = 'A secret key shared between the external system and Moodle for encrypting SSO data. Use a strong, random string (at least 32 characters). This must match the value in your external system configuration.';
+$string['plugin_not_configured'] = 'SSO integration has not yet been configured. Please contact the Moodle administrator for details.';
+
+// SSO Flow steps.
+$string['how_it_works'] = 'How It Works';
+$string['sso_flow'] = 'SSO Flow';
+$string['step1'] = 'External Login';
+$string['step1_desc'] = 'User logs into external system (WordPress, Drupal, etc.)';
+$string['step2'] = 'Encrypt Data';
+$string['step2_desc'] = 'External system encrypts user data with shared secret';
+$string['step3'] = 'Send to Moodle';
+$string['step3_desc'] = 'POST encrypted data to Moodle SSO endpoint';
+$string['step4'] = 'Verify & Login';
+$string['step4_desc'] = 'Moodle decrypts, verifies hash, and logs in user';
+
+// API Endpoints.
+$string['api_endpoints'] = 'API Endpoints';
+$string['endpoint'] = 'Endpoint';
+$string['method'] = 'Method';
+$string['description'] = 'Description';
+$string['store_session'] = 'Store session data (mch_data parameter)';
+$string['login_user'] = 'Login user with verification hash';
+$string['logout_user'] = 'Logout user with verification hash';
+
+// Documentation.
+$string['documentation'] = 'Documentation';
+$string['view_full_guide'] = 'View Full Integration Guide';
+$string['docs_desc'] = 'Complete guide with PHP, Node.js, and Python examples.';
+
+// Supported systems.
+$string['supported_systems'] = 'Supported Systems';
+$string['supported_systems_desc'] = 'This plugin works with WordPress, Drupal, Joomla, custom PHP apps, Node.js, Python, and any system with OpenSSL support.';
+$string['wordpress_desc'] = 'Full SSO support';
+$string['drupal_desc'] = 'Full SSO support';
+$string['php_desc'] = 'Full SSO support';
+$string['other_desc'] = 'Full SSO support';
 
 // Integration guide.
 $string['integration_guide'] = 'Integration Guide';
 $string['integration_guide_content'] = 'How to integrate external systems with Moodle SSO.';
-$string['supported_systems'] = 'Supported Systems';
-$string['supported_systems_desc'] = 'This plugin works with WordPress, Drupal, Joomla, custom PHP apps, Node.js, Python, and any system with OpenSSL support.';
 
 $string['sso_settings'] = 'SSO Settings';
 $string['sso_settings_desc'] = 'Configure Single Sign-On (SSO) for external systems (WordPress).';

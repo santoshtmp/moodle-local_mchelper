@@ -78,14 +78,6 @@ $functions = [
         'loginrequired' => true,
         'capabilities' => 'moodle/user:delete',
     ],
-    'local_mchelpers_user_login' => [
-        'classname' => 'local_mchelpers\external\user\login',
-        'methodname' => 'login',
-        'description' => 'Authenticate user and return session token',
-        'type' => 'write',
-        'ajax' => false,
-        'loginrequired' => false,
-    ],
     'local_mchelpers_user_logout' => [
         'classname' => 'local_mchelpers\external\user\logout',
         'methodname' => 'logout',
@@ -194,7 +186,6 @@ $services = [
             'local_mchelpers_user_create',
             'local_mchelpers_user_update',
             'local_mchelpers_user_delete',
-            'local_mchelpers_user_login',
             'local_mchelpers_user_logout',
             // Course APIs.
             'local_mchelpers_course_get_info',
